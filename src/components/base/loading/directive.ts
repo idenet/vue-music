@@ -18,7 +18,6 @@ const loadingirective = {
     const app = createApp(Loading)
     const instance: Component = app.mount(document.createElement('div'))
     el.instance = instance
-    console.log(instance)
 
     const title = binding.arg
 
