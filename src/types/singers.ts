@@ -1,4 +1,4 @@
-interface SingerType {
+export interface SingerType {
   id: number,
   mid: string
   name: string

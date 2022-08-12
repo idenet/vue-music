@@ -4,7 +4,7 @@
       <li v-for="group in props.singers" :key="group.title" class="group">
         <h2 class="title">{{ group.title }}</h2>
         <ul>
-          <li v-for="item in group.list" :key="item.id" class="item">
+          <li v-for="item in group.list" :key="item.id" class="item" @click="onItemCLick(item)">
             <img class="avatar" v-lazy="item.pic">
             <span class="name">{{ item.name }}</span>
           </li>
@@ -28,8 +28,8 @@
 
 <script lang="ts" setup>
 import Scroll from '../scroll/scroll.vue'
-import { defineProps } from 'vue'
-import { SingersType } from '@/types/singers'
+import { defineProps, defineEmits } from 'vue'
+import { SingersType, SingerType } from '@/types/singers'
 import useFixed from './use-fixed'
 import useShortcut from './use-shortcut'
 
@@ -39,9 +39,15 @@ interface Props {
 
 const props = defineProps<Props>()
 
+const emit = defineEmits(['select'])
+
 const { groupRef, onScroll, fixedTitle, fixedStyle, currentIndex } = useFixed(props)
 
 const { shortcutList, scrollRef, onShortcutTouchStart, onShortcutTouchMove } = useShortcut(props, groupRef)
+
+function onItemCLick(item: SingerType) {
+  emit('select', item)
+}
 
 </script>
 
