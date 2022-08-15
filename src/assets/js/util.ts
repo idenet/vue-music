@@ -15,6 +15,13 @@ function getRandomInt(max: number) {
 
 function swap(arr: SongType[], i: number, j: number) {
   const t = arr[i]
-  arr[j] = arr[i]
-  arr[i] = t
+  arr[i] = arr[j]
+  arr[j] = t
+}
+
+export function formatTime(interval: number) {
+  interval = interval | 0
+  const minute = ((interval / 60 | 0) + '').padStart(2, '0')
+  const second = (interval % 60 + '').padStart(2, '0')
+  return `${minute}:${second}`
 }

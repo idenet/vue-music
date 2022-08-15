@@ -127,15 +127,15 @@ function onScroll(pos: any) {
   scrollY.value = -pos.y
 }
 
-function selectItem({ song, index }: { song: SongType, index: number }) {
+function selectItem({ index }: { song: SongType, index: number }) {
   playStore.selectPlay({
-    list: props.songs as [],
+    list: props.songs,
     index
   })
 }
 
 function random() {
-  playStore.randomPlay(props.songs as [])
+  playStore.randomPlay(props.songs)
 }
 
 </script>
