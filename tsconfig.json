@@ -32,8 +32,9 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx"
-, "src/components/base/loading/directive.js"  ],
+    "tests/**/*.tsx",
+    "src/components/base/loading/directive.js"
+  ],
   "exclude": [
     "node_modules"
   ]

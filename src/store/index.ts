@@ -87,6 +87,14 @@ export const usePlayerStore = defineStore('player', {
       console.log(index)
       this.setCurrentIndex(index)
       this.setPlayMode(mode)
+    },
+    addSongLyric({ song, lyric }: { song: SongType, lyric: string }) {
+      this.sequeceList.map(item => {
+        if (item.mid === song.mid) {
+          item.lyric = lyric
+        }
+        return item
+      })
     }
   }
 })
