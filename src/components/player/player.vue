@@ -1,5 +1,5 @@
 <template>
-  <div class="player">
+  <div class="player" v-show="playList.length">
     <div class="normal-player" v-show="playerStore.fullScreenGetter">
       <div class="background">
         <img :src="currentSong.pic">
@@ -45,7 +45,7 @@
         <div class="progress-wrapper">
           <span class="time time-l">{{ formatTime(currentTime) }}</span>
           <div class="progress-bar-wrapper">
-            <progressBar :progress="progress" @progress-changing="onProgressChanging"
+            <progressBar ref="barRef" :progress="progress" @progress-changing="onProgressChanging"
               @progress-changed="onProgressChanged"></progressBar>
           </div>
           <span class="time time-r">{{ formatTime(currentSong.duration) }}</span>
@@ -69,6 +69,7 @@
         </div>
       </div>
     </div>
+    <miniPlayer :progress="progress" :togglePlay="togglePlay"></miniPlayer>
     <audio ref="audioRef" @pause="pause" @canplay="ready" @error="error" @timeupdate="updateTime" @ended="end"></audio>
   </div>
 </template>
@@ -76,7 +77,7 @@
 <script lang='ts' setup>
 import scroll from '../base/scroll/scroll.vue'
 import { PLAYMODE, usePlayerStore } from '../../store/index'
-import { ref, watch, computed } from 'vue'
+import { ref, watch, computed, nextTick } from 'vue'
 import useMode from './useMode'
 import useFavorite from './useFavorite'
 import progressBar from './progress-bar.vue'
@@ -84,10 +85,12 @@ import { formatTime } from '@/assets/js/util'
 import useCd from './use-cd'
 import useLyric from './use-lyric'
 import useMiddleInteractive from './use-middle-interactive'
+import miniPlayer from './mini-player.vue'
 
 const audioRef = ref<HTMLAudioElement | null>(null)
 const songReady = ref<boolean>(false)
 const currentTime = ref<number>(0)
+const barRef = ref<any>(null)
 
 const playerStore = usePlayerStore()
 
@@ -137,6 +140,13 @@ watch(playing, (newPlaying) => {
   } else {
     audioEl.pause()
     stopLyric()
+  }
+})
+
+watch(() => playerStore.fullScreenGetter, async (newFullScreen) => {
+  if (newFullScreen) {
+    await nextTick()
+    barRef.value.setOffset(progress.value)
   }
 })
 

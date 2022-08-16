@@ -11,7 +11,7 @@
 </template>
 
 <script lang='ts' setup>
-import { computed, defineProps, ref, watch, defineEmits } from 'vue'
+import { computed, defineProps, ref, watch, defineEmits, defineExpose } from 'vue'
 
 interface Props {
   progress: number
@@ -30,9 +30,7 @@ const progressStyle = computed(() => `width:${offset.value}px`)
 const btnStyle = computed(() => `transform:translate3d(${offset.value}px, 0, 0)`)
 
 watch(() => props.progress, (newProgress) => {
-  const propressRef = propgressBarRef.value as HTMLDivElement
-  const barWidth = propressRef.clientWidth - progressBtnWidth
-  offset.value = barWidth * newProgress
+  setOffset(newProgress)
 })
 
 interface TouchType {
@@ -73,6 +71,15 @@ function onClick(e: any) {
   emit('progress-changed', progress)
 }
 
+function setOffset(progress: number) {
+  const propressRef = propgressBarRef.value as HTMLDivElement
+  const barWidth = propressRef.clientWidth - progressBtnWidth
+  offset.value = barWidth * progress
+}
+
+defineExpose({
+  setOffset
+})
 </script>
 
 <style lang='scss' scoped>

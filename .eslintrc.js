@@ -17,6 +17,7 @@ module.exports = {
     'vue/multi-word-component-names': 'off',
     indent: 0,
     'space-before-function-paren': 0,
-    '@typescript-eslint/no-explicit-any': 0
+    '@typescript-eslint/no-explicit-any': 0,
+    'vue/no-setup-props-destructure': 0
   }
 }
