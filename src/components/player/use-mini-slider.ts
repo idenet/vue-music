@@ -40,7 +40,6 @@ export function useMiniSlider() {
           )
           sliderV.on('slidePageChanged', ({ pageX }: { pageX: number }) => {
             store.setCurrentIndex(pageX)
-            store.setPlayState(true)
           })
         } else {
           sliderV.refresh()
@@ -52,6 +51,13 @@ export function useMiniSlider() {
     watch(currentIndex, (newIndex) => {
       if (sliderV && sliderShow.value) {
         sliderV.goToPage(newIndex, 0, 0)
+      }
+    })
+
+    watch(playlist, async (newlist) => {
+      if (sliderV && sliderShow.value && newlist.length) {
+        await nextTick()
+        sliderV.refresh()
       }
     })
   })

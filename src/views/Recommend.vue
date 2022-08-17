@@ -34,7 +34,7 @@
 import { computed, onMounted, ref } from 'vue'
 import { getRecommend } from '../service/recommend'
 import Slider from '@/components/base/Slider/Slider.vue'
-import Scroll from '@/components/base/scroll/scroll.vue'
+import Scroll from '@/components/wrap-scroll'
 
 interface SliderType {
   id: string

@@ -32,7 +32,7 @@
 import { defineProps, computed, ref, onMounted } from 'vue'
 import { SongType } from '../../types/song'
 import SongList from '@/components/base/song-list/song-list.vue'
-import scroll from '@/components/base/scroll/scroll.vue'
+import scroll from '@/components/wrap-scroll/index'
 import { useRouter } from 'vue-router'
 import { usePlayerStore } from '../../store/index'
 
@@ -89,8 +89,10 @@ const bgImageStyle = computed(() => {
 })
 // 滚动的样式
 const scrollStype = computed(() => {
+  const bottom = playStore.playList.length ? '60px' : 0
   return {
     top: `${imageHeight.value}px`,
+    bottom,
   }
 })
 // 模糊的computed

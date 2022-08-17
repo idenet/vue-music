@@ -29,21 +29,28 @@
           ></i>
         </progressCircle>
       </div>
+      <div class="control" @click.stop="showPlayList">
+        <i class="icon-playlist"></i>
+      </div>
+      <playList ref="playlistRef"></playList>
     </div>
   </transition>
 </template>
 
 <script lang="ts" setup>
 import { usePlayerStore } from '@/store'
-import { computed, defineProps } from 'vue'
+import { computed, defineProps, ref } from 'vue'
 import useCd from './use-cd'
 import progressCircle from './progress-circle.vue'
+import playList from './playlist.vue'
 import { useMiniSlider } from './use-mini-slider'
 
 interface Props {
   progress: number
   togglePlay: () => void
 }
+
+const playlistRef = ref<any>(null)
 
 const { progress, togglePlay } = defineProps<Props>()
 
@@ -62,6 +69,10 @@ const miniPlayIcon = computed(() =>
 
 function showNormalPlayer() {
   store.setFullScreen(true)
+}
+
+function showPlayList() {
+  playlistRef.value.show()
 }
 </script>
 

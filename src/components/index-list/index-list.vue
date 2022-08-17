@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts" setup>
-import Scroll from '../scroll/scroll.vue'
+import Scroll from '@/components/wrap-scroll'
 import { defineProps, defineEmits } from 'vue'
 import { SingersType, SingerType } from '@/types/singers'
 import useFixed from './use-fixed'

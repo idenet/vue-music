@@ -181,6 +181,7 @@ watch(currentSong, (newSong) => {
   const audioEl = audioRef.value as HTMLAudioElement
   audioEl.src = newSong.url
   audioEl.play()
+  playerStore.setPlayState(true)
 })
 
 watch(playing, (newPlaying) => {
@@ -234,9 +235,6 @@ function prev() {
       index = list.length - 1
     }
     playerStore.setCurrentIndex(index)
-    if (!playing.value) {
-      playerStore.setPlayState(true)
-    }
   }
 }
 
@@ -251,9 +249,6 @@ function next() {
       index = 0
     }
     playerStore.setCurrentIndex(index)
-    if (!playing.value) {
-      playerStore.setPlayState(true)
-    }
   }
 }
 

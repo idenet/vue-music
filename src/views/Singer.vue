@@ -13,7 +13,7 @@
 <script lang="ts" setup>
 import { getSingerList } from '@/service/singer'
 import { onMounted, ref } from 'vue'
-import indexListVue from '@/components/base/index-list/index-list.vue'
+import indexListVue from '@/components/index-list/index-list.vue'
 import { SingersType, SingerType } from '../types/singers'
 import { useRouter } from 'vue-router'
 import storage from 'good-storage'

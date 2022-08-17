@@ -96,5 +96,37 @@ export const usePlayerStore = defineStore('player', {
         return item
       })
     },
+    removeSong(song: SongType) {
+      const sequenceList = this.sequeceList.slice()
+      const playlist = this.playList.slice()
+
+      const sequenceIndex = findIndex(sequenceList, song)
+      const playIndex = findIndex(playlist, song)
+      if (playIndex < 0) return
+
+      sequenceList.splice(sequenceIndex, 1)
+      playlist.splice(playIndex, 1)
+      let currentIndex = this.currentIndex
+      if (playIndex < currentIndex || currentIndex === playlist.length) {
+        currentIndex--
+      }
+
+      this.setSequenceList(sequenceList)
+      this.setPlayList(playlist)
+      this.setCurrentIndex(currentIndex)
+      if (!playlist.length) {
+        this.setPlayState(false)
+      }
+    },
+    clearSongList() {
+      this.setSequenceList([])
+      this.setPlayList([])
+      this.setCurrentIndex(0)
+      this.setPlayState(false)
+    },
   },
 })
+
+function findIndex(list: SongType[], song: SongType) {
+  return list.findIndex((item) => item.id === song.id)
+}
