@@ -12,7 +12,7 @@
           <ul>
             <li v-for="item in albums" class="item" :key="item.id">
               <div class="icon">
-                <img width="60" height="60" v-lazy="item.pic">
+                <img width="60" height="60" v-lazy="item.pic" />
               </div>
               <div class="text">
                 <h2 class="name">
@@ -30,7 +30,7 @@
   </div>
 </template>
 
-<script lang='ts' setup>
+<script lang="ts" setup>
 import { computed, onMounted, ref } from 'vue'
 import { getRecommend } from '../service/recommend'
 import Slider from '@/components/base/Slider/Slider.vue'
@@ -64,7 +64,6 @@ async function _getRecommend() {
   sliders.value = result.sliders
   albums.value = result.albums
 }
-
 </script>
 
 <style lang="scss" scoped>

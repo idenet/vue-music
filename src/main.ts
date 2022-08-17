@@ -12,7 +12,7 @@ createApp(App)
   .use(createPinia())
   .use(router)
   .use(lazyPlugin, {
-    loading: require('@/assets/images/default.png')
+    loading: require('@/assets/images/default.png'),
   })
   .directive('loading', loadingirective)
   .directive('no-result', noResultDirective)

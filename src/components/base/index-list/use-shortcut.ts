@@ -13,7 +13,7 @@ interface elType extends HTMLDivElement {
 
 interface TouchType {
   y1: number
-  y2: number,
+  y2: number
   anchorIndex: number
 }
 
@@ -29,7 +29,7 @@ export default function useShortcut(props: Props, groupRef: Ref) {
   const touch: TouchType = {
     y1: 0,
     y2: 0,
-    anchorIndex: 0
+    anchorIndex: 0,
   }
 
   function onShortcutTouchStart(e: TouchEvent) {
@@ -43,7 +43,7 @@ export default function useShortcut(props: Props, groupRef: Ref) {
 
   function onShortcutTouchMove(e: TouchEvent) {
     touch.y2 = e.touches[0].pageY
-    const delta = (touch.y2 - touch.y1) / ANCHOR_HEIGHT | 0
+    const delta = ((touch.y2 - touch.y1) / ANCHOR_HEIGHT) | 0
     const anchorIndex = touch.anchorIndex + delta
 
     scrollTo(anchorIndex)
@@ -65,6 +65,6 @@ export default function useShortcut(props: Props, groupRef: Ref) {
     shortcutList,
     onShortcutTouchStart,
     onShortcutTouchMove,
-    scrollRef
+    scrollRef,
   }
 }

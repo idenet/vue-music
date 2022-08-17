@@ -24,16 +24,22 @@ export default function useFixed(props: Props) {
 
   const fixedStyle = computed(() => {
     const distanceValue = distance.value
-    const diff = (distanceValue > 0 && distanceValue < TITLE_HEIGHT) ? distanceValue - TITLE_HEIGHT : 0
+    const diff =
+      distanceValue > 0 && distanceValue < TITLE_HEIGHT
+        ? distanceValue - TITLE_HEIGHT
+        : 0
     return {
-      transform: `translate3d(0, ${diff}px, 0)`
+      transform: `translate3d(0, ${diff}px, 0)`,
     }
   })
 
-  watch(() => props.singers, async () => {
-    await nextTick()
-    calculate()
-  })
+  watch(
+    () => props.singers,
+    async () => {
+      await nextTick()
+      calculate()
+    }
+  )
 
   watch(scrollY, (newY) => {
     const listHeightsVal = listHeights.value
@@ -69,6 +75,6 @@ export default function useFixed(props: Props) {
     onScroll,
     fixedTitle,
     fixedStyle,
-    currentIndex
+    currentIndex,
   }
 }

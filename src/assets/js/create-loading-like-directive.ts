@@ -54,6 +54,6 @@ export default function createLoadingLikeDirective(Comp: Component) {
       if (binding.value !== binding.oldValue) {
         binding.value ? append(el) : remove(el)
       }
-    }
+    },
   }
 }

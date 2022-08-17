@@ -4,13 +4,24 @@
 module.exports = {
   disableEmoji: false,
   // format: '{type}{scope}: {emoji}{subject}',
-  list: ['test', 'feat', 'fix', 'chore', 'docs', 'refactor', 'style', 'ci', 'perf'],
+  list: [
+    'test',
+    'feat',
+    'fix',
+    'chore',
+    'docs',
+    'refactor',
+    'style',
+    'ci',
+    'perf',
+  ],
   maxMessageLength: 64,
   minMessageLength: 3,
-  questions: ['type',
+  questions: [
+    'type',
     'scope',
     'subject',
-    'body'
+    'body',
     // 'breaking'
     // 'issues',
     // 'lerna'
@@ -20,52 +31,52 @@ module.exports = {
     chore: {
       description: '一些与主要业务无关的构建/工程依赖/工具等功能改动',
       emoji: '🤖',
-      value: 'chore'
+      value: 'chore',
     },
     ci: {
       description: 'CI related changes',
       emoji: '🎡',
-      value: 'ci'
+      value: 'ci',
     },
     docs: {
       description: '文档更新(如：README)',
       emoji: '✏️',
-      value: 'docs'
+      value: 'docs',
     },
     feat: {
       description: '新的特性',
       emoji: '🎸',
-      value: 'feat'
+      value: 'feat',
     },
     fix: {
       description: 'bug 修复',
       emoji: '🐛',
-      value: 'fix'
+      value: 'fix',
     },
     perf: {
       description: '优化了性能的代码改动',
       emoji: '⚡️',
-      value: 'perf'
+      value: 'perf',
     },
     refactor: {
       description: '一些代码结构上优化，既不是新特性也不是修 Bug',
       emoji: '💡',
-      value: 'refactor'
+      value: 'refactor',
     },
     release: {
       description: 'Create a release commit',
       emoji: '🏹',
-      value: 'release'
+      value: 'release',
     },
     style: {
       description: '代码的样式美化，不涉及到功能修改等',
       emoji: '💄',
-      value: 'style'
+      value: 'style',
     },
     test: {
       description: '新增或修改已有的测试代码',
       emoji: '💍',
-      value: 'test'
-    }
-  }
+      value: 'test',
+    },
+  },
 }

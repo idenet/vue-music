@@ -10,7 +10,7 @@
   </div>
 </template>
 
-<script lang='ts' setup>
+<script lang="ts" setup>
 import { getSingerList } from '@/service/singer'
 import { onMounted, ref } from 'vue'
 import indexListVue from '@/components/base/index-list/index-list.vue'
@@ -32,7 +32,7 @@ function selectSinger(singer: SingerType) {
   selectedSinger.value = singer
   cacheSinger(singer)
   router.push({
-    path: `/singer/${singer.mid}`
+    path: `/singer/${singer.mid}`,
   })
 }
 
@@ -46,7 +46,7 @@ function cacheSinger(singer: SingerType) {
 }
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .singer {
   position: fixed;
   width: 100%;

@@ -31,13 +31,15 @@ export default function useFavorite() {
   }
 
   function isFavorite(song: SongType) {
-    return favoriteList.value.findIndex((item) => {
-      return item.id === song.id
-    }) > -1
+    return (
+      favoriteList.value.findIndex((item) => {
+        return item.id === song.id
+      }) > -1
+    )
   }
 
   return {
     getFavoriteIcon,
-    toggleFavorite
+    toggleFavorite,
   }
 }

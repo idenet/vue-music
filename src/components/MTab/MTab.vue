@@ -1,6 +1,11 @@
 <template>
   <div class="tab">
-    <router-link class="tab-item" v-for="tab in tabs" :key="tab.path" :to="tab.path">
+    <router-link
+      class="tab-item"
+      v-for="tab in tabs"
+      :key="tab.path"
+      :to="tab.path"
+    >
       <span class="tab-link">
         {{ tab.name }}
       </span>
@@ -8,25 +13,27 @@
   </div>
 </template>
 
-<script lang='ts' setup>
+<script lang="ts" setup>
 import { ref } from 'vue'
 
-const tabs = ref([{
-  name: '推荐',
-  path: '/recommend'
-},
-{
-  name: '歌手',
-  path: '/singer'
-},
-{
-  name: '排行',
-  path: '/top-list'
-},
-{
-  name: '搜索',
-  path: '/search'
-}])
+const tabs = ref([
+  {
+    name: '推荐',
+    path: '/recommend',
+  },
+  {
+    name: '歌手',
+    path: '/singer',
+  },
+  {
+    name: '排行',
+    path: '/top-list',
+  },
+  {
+    name: '搜索',
+    path: '/search',
+  },
+])
 </script>
 
 <style lang="scss" scoped>

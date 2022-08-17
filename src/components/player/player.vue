@@ -2,7 +2,7 @@
   <div class="player" v-show="playList.length">
     <div class="normal-player" v-show="playerStore.fullScreenGetter">
       <div class="background">
-        <img :src="currentSong.pic">
+        <img :src="currentSong.pic" />
       </div>
       <div class="top">
         <div class="back" @click="goBack">
@@ -11,12 +11,21 @@
         <h1 class="title">{{ currentSong.name }}</h1>
         <h1 class="subtitle">{{ currentSong.singer }}</h1>
       </div>
-      <div class="middle" @touchstart.prevent="onMiddleTouchStart" @touchmove.prevent="onMiddleTouchMove"
-        @touchend.prevent="onMiddleTouchEnd">
+      <div
+        class="middle"
+        @touchstart.prevent="onMiddleTouchStart"
+        @touchmove.prevent="onMiddleTouchMove"
+        @touchend.prevent="onMiddleTouchEnd"
+      >
         <div class="middle-l" :style="middleLStyle">
           <div ref="cdWrapperRef" class="cd-wrapper">
             <div ref="cdRef" class="cd">
-              <img ref="cdImageRef" class="image" :class="cdCls" :src="currentSong.pic">
+              <img
+                ref="cdImageRef"
+                class="image"
+                :class="cdCls"
+                :src="currentSong.pic"
+              />
             </div>
           </div>
           <div class="playing-lyric-wrapper">
@@ -26,8 +35,12 @@
         <scroll class="middle-r" ref="lyricScrollRef" :style="middleRStyle">
           <div class="lyric-wrapper">
             <div v-if="currentLyric" ref="lyricListRef">
-              <p class="text" :class="{ 'current': currentLineNum === index }"
-                v-for="(line, index) in currentLyric.lines" :key="line.time">
+              <p
+                class="text"
+                :class="{ current: currentLineNum === index }"
+                v-for="(line, index) in currentLyric.lines"
+                :key="line.time"
+              >
                 {{ line.txt }}
               </p>
             </div>
@@ -39,16 +52,22 @@
       </div>
       <div class="bottom">
         <div class="dot-wrapper">
-          <span class="dot" :class="{ 'active': currentShow === 'cd' }"></span>
-          <span class="dot" :class="{ 'active': currentShow === 'lyric' }"></span>
+          <span class="dot" :class="{ active: currentShow === 'cd' }"></span>
+          <span class="dot" :class="{ active: currentShow === 'lyric' }"></span>
         </div>
         <div class="progress-wrapper">
           <span class="time time-l">{{ formatTime(currentTime) }}</span>
           <div class="progress-bar-wrapper">
-            <progressBar ref="barRef" :progress="progress" @progress-changing="onProgressChanging"
-              @progress-changed="onProgressChanged"></progressBar>
+            <progressBar
+              ref="barRef"
+              :progress="progress"
+              @progress-changing="onProgressChanging"
+              @progress-changed="onProgressChanged"
+            ></progressBar>
           </div>
-          <span class="time time-r">{{ formatTime(currentSong.duration) }}</span>
+          <span class="time time-r">{{
+            formatTime(currentSong.duration)
+          }}</span>
         </div>
         <div class="operators">
           <div class="icon i-left">
@@ -64,17 +83,27 @@
             <i @click="next" class="icon-next"></i>
           </div>
           <div class="icon i-right">
-            <i :class="getFavoriteIcon(currentSong)" @click="toggleFavorite(currentSong)"></i>
+            <i
+              :class="getFavoriteIcon(currentSong)"
+              @click="toggleFavorite(currentSong)"
+            ></i>
           </div>
         </div>
       </div>
     </div>
     <miniPlayer :progress="progress" :togglePlay="togglePlay"></miniPlayer>
-    <audio ref="audioRef" @pause="pause" @canplay="ready" @error="error" @timeupdate="updateTime" @ended="end"></audio>
+    <audio
+      ref="audioRef"
+      @pause="pause"
+      @canplay="ready"
+      @error="error"
+      @timeupdate="updateTime"
+      @ended="end"
+    ></audio>
   </div>
 </template>
 
-<script lang='ts' setup>
+<script lang="ts" setup>
 import scroll from '../base/scroll/scroll.vue'
 import { PLAYMODE, usePlayerStore } from '../../store/index'
 import { ref, watch, computed, nextTick } from 'vue'
@@ -97,7 +126,16 @@ const playerStore = usePlayerStore()
 const { modeIcon, changeMode } = useMode()
 const { toggleFavorite, getFavoriteIcon } = useFavorite()
 const { cdCls, cdRef, cdImageRef } = useCd()
-const { currentLyric, currentLineNum, playLyric, lyricScrollRef, lyricListRef, stopLyric, pureMusicLyric, playingLyric } = useLyric({ songReady, currentTime })
+const {
+  currentLyric,
+  currentLineNum,
+  playLyric,
+  lyricScrollRef,
+  lyricListRef,
+  stopLyric,
+  pureMusicLyric,
+  playingLyric,
+} = useLyric({ songReady, currentTime })
 
 const {
   currentShow,
@@ -105,7 +143,7 @@ const {
   middleRStyle,
   onMiddleTouchStart,
   onMiddleTouchMove,
-  onMiddleTouchEnd
+  onMiddleTouchEnd,
 } = useMiddleInteractive()
 
 // pinia getter
@@ -118,7 +156,7 @@ const playMode = computed(() => playerStore.playMode)
 const playIcon = computed(() => {
   return playing.value ? 'icon-pause' : 'icon-play'
 })
-const disableCls = computed(() => songReady.value ? '' : 'disable')
+const disableCls = computed(() => (songReady.value ? '' : 'disable'))
 const progress = computed(() => currentTime.value / currentSong.value.duration)
 
 // watch
@@ -143,12 +181,15 @@ watch(playing, (newPlaying) => {
   }
 })
 
-watch(() => playerStore.fullScreenGetter, async (newFullScreen) => {
-  if (newFullScreen) {
-    await nextTick()
-    barRef.value.setOffset(progress.value)
+watch(
+  () => playerStore.fullScreenGetter,
+  async (newFullScreen) => {
+    if (newFullScreen) {
+      await nextTick()
+      barRef.value.setOffset(progress.value)
+    }
   }
-})
+)
 
 // function
 function goBack() {
@@ -251,10 +292,9 @@ function _loop() {
   audioEl.play()
   playerStore.setPlayState(true)
 }
-
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .player {
   .normal-player {
     position: fixed;
@@ -359,7 +399,7 @@ function _loop() {
             }
 
             .playing {
-              animation: rotate 20s linear infinite
+              animation: rotate 20s linear infinite;
             }
           }
         }
@@ -497,7 +537,7 @@ function _loop() {
         }
 
         .i-right {
-          text-align: left
+          text-align: left;
         }
 
         .icon-favorite {
@@ -508,11 +548,11 @@ function _loop() {
 
     &.normal-enter-active,
     &.normal-leave-active {
-      transition: all .6s;
+      transition: all 0.6s;
 
       .top,
       .bottom {
-        transition: all .6s cubic-bezier(0.45, 0, 0.55, 1);
+        transition: all 0.6s cubic-bezier(0.45, 0, 0.55, 1);
       }
     }
 
@@ -525,7 +565,7 @@ function _loop() {
       }
 
       .bottom {
-        transform: translate3d(0, 100px, 0)
+        transform: translate3d(0, 100px, 0);
       }
     }
   }

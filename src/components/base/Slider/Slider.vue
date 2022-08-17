@@ -8,8 +8,12 @@
       </div>
     </div>
     <div class="dots-wrapper">
-      <span class="dot" v-for="(item, index) in sliders" :key="item.id"
-        :class="{ 'active': currentPageIndex === index }">
+      <span
+        class="dot"
+        v-for="(item, index) in sliders"
+        :key="item.id"
+        :class="{ active: currentPageIndex === index }"
+      >
       </span>
     </div>
   </div>
@@ -34,7 +38,6 @@ const props = defineProps<Props>()
 // 获取dom
 const rootRef = ref<HTMLDivElement | null>(null)
 const { currentPageIndex } = useSlider(rootRef)
-
 </script>
 
 <style lang="scss" scoped>

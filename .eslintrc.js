@@ -1,16 +1,16 @@
 module.exports = {
   root: true,
   env: {
-    node: true
+    node: true,
   },
   extends: [
     'plugin:vue/vue3-essential',
     '@vue/standard',
     '@vue/typescript/recommended',
-    'prettier'
+    'prettier',
   ],
   parserOptions: {
-    ecmaVersion: 2020
+    ecmaVersion: 2020,
   },
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
@@ -19,6 +19,6 @@ module.exports = {
     indent: 0,
     'space-before-function-paren': 0,
     '@typescript-eslint/no-explicit-any': 0,
-    'vue/no-setup-props-destructure': 0
-  }
+    'vue/no-setup-props-destructure': 0,
+  },
 }

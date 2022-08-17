@@ -7,16 +7,16 @@ import { FAVORATE_KEY } from '../assets/js/constant'
 export enum PLAYMODE {
   sequence = 0,
   loop = 1,
-  random = 2
+  random = 2,
 }
 
 interface PlayerType {
-  sequeceList: SongType[], // 歌曲列表
-  playList: SongType[], // 真实的播放列表
-  playing: boolean, // 播放状态
-  playMode: PLAYMODE, // 播放模式
-  currentIndex: number, // 当前播放
-  fullScreen: boolean, // 是否全屏
+  sequeceList: SongType[] // 歌曲列表
+  playList: SongType[] // 真实的播放列表
+  playing: boolean // 播放状态
+  playMode: PLAYMODE // 播放模式
+  currentIndex: number // 当前播放
+  fullScreen: boolean // 是否全屏
   favoriteList: SongType[]
 }
 
@@ -29,11 +29,11 @@ export const usePlayerStore = defineStore('player', {
     playMode: PLAYMODE.sequence, // 播放模式
     currentIndex: 0, // 当前播放
     fullScreen: false, // 是否全屏
-    favoriteList: load(FAVORATE_KEY)
+    favoriteList: load(FAVORATE_KEY),
   }),
   getters: {
     currentSong: (state) => state.playList[state.currentIndex] || {},
-    fullScreenGetter: (state) => state.fullScreen
+    fullScreenGetter: (state) => state.fullScreen,
   },
   actions: {
     setPlayState(playing: boolean): void {
@@ -58,7 +58,7 @@ export const usePlayerStore = defineStore('player', {
       this.favoriteList = list
     },
     // 选择播放
-    selectPlay({ list, index }: { list: SongType[], index: number }) {
+    selectPlay({ list, index }: { list: SongType[]; index: number }) {
       this.setPlayMode(PLAYMODE.sequence)
       this.setSequenceList(list)
       this.setPlayState(true)
@@ -88,13 +88,13 @@ export const usePlayerStore = defineStore('player', {
       this.setCurrentIndex(index)
       this.setPlayMode(mode)
     },
-    addSongLyric({ song, lyric }: { song: SongType, lyric: string }) {
-      this.sequeceList.map(item => {
+    addSongLyric({ song, lyric }: { song: SongType; lyric: string }) {
+      this.sequeceList.map((item) => {
         if (item.mid === song.mid) {
           item.lyric = lyric
         }
         return item
       })
-    }
-  }
+    },
+  },
 })

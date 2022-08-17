@@ -17,13 +17,13 @@ function setTitle(text: string): void {
 }
 
 defineExpose({
-  setTitle
+  setTitle,
 })
 </script>
 
 <script lang="ts">
 export default {
-  name: 'no-result'
+  name: 'no-result',
 }
 </script>
 

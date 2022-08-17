@@ -3,11 +3,11 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 const routes = [
   {
     path: '/',
-    redirect: '/recommend'
+    redirect: '/recommend',
   },
   {
     path: '/recommend',
-    component: () => import('@/views/Recommend.vue')
+    component: () => import('@/views/Recommend.vue'),
   },
   {
     path: '/singer',
@@ -15,23 +15,23 @@ const routes = [
     children: [
       {
         path: ':id',
-        component: () => import('@/views/singer-detail.vue')
-      }
-    ]
+        component: () => import('@/views/singer-detail.vue'),
+      },
+    ],
   },
   {
     path: '/top-list',
-    component: () => import('@/views/TopList.vue')
+    component: () => import('@/views/TopList.vue'),
   },
   {
     path: '/search',
-    component: () => import('@/views/Search.vue')
-  }
+    component: () => import('@/views/Search.vue'),
+  },
 ]
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes
+  routes,
 })
 
 export default router

@@ -10,7 +10,7 @@ export default function useScroll(wrapperRef: any, options: any, emit: any) {
   onMounted(() => {
     scroll.value = new BScroll(wrapperRef.value, {
       ...options,
-      observeDOM: true
+      observeDOM: true,
     })
 
     if (options.probeType > 0) {
@@ -25,6 +25,6 @@ export default function useScroll(wrapperRef: any, options: any, emit: any) {
   })
 
   return {
-    scroll
+    scroll,
   }
 }

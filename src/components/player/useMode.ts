@@ -8,7 +8,11 @@ export default function useMode() {
 
   const modeIcon = computed(() => {
     const playModeV = playMode.value
-    return playModeV === PLAYMODE.sequence ? 'icon-sequence' : playModeV === PLAYMODE.random ? 'icon-random' : 'icon-loop'
+    return playModeV === PLAYMODE.sequence
+      ? 'icon-sequence'
+      : playModeV === PLAYMODE.random
+      ? 'icon-random'
+      : 'icon-loop'
   })
 
   function changeMode() {
@@ -18,6 +22,6 @@ export default function useMode() {
 
   return {
     modeIcon,
-    changeMode
+    changeMode,
   }
 }

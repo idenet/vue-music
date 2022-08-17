@@ -5,7 +5,12 @@ interface CompareType {
   (item: SongType): boolean
 }
 
-function insertArray(arr: SongType[], val: SongType, compare: CompareType, maxLen?: number) {
+function insertArray(
+  arr: SongType[],
+  val: SongType,
+  compare: CompareType,
+  maxLen?: number
+) {
   const index = arr.findIndex(compare)
   if (index > -1) return
   arr.unshift(val)
@@ -21,7 +26,12 @@ function deleteFromArray(arr: SongType[], compare: CompareType) {
   }
 }
 
-export function save(item: SongType, key: string, compare: CompareType, maxLen?: number): SongType[] {
+export function save(
+  item: SongType,
+  key: string,
+  compare: CompareType,
+  maxLen?: number
+): SongType[] {
   const items = storage.get(key, [])
   insertArray(items, item, compare, maxLen)
   storage.set(key, items)

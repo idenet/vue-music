@@ -1,4 +1,3 @@
-
 <template>
   <div class="music-list">
     <div class="back" @click="goBack">
@@ -14,8 +13,14 @@
       </div>
       <div class="filter" :style="filterStyle"></div>
     </div>
-    <scroll class="list" :style="scrollStype" v-loading="loading" v-no-result:[noResultTextn]="noResult" :probe-type="3"
-      @scroll="onScroll">
+    <scroll
+      class="list"
+      :style="scrollStype"
+      v-loading="loading"
+      v-no-result:[noResultTextn]="noResult"
+      :probe-type="3"
+      @scroll="onScroll"
+    >
       <div class="song-list-wrapper">
         <song-list :songs="props.songs" @select="selectItem"></song-list>
       </div>
@@ -36,8 +41,8 @@ const RESERVED_HEIGHT = 40
 interface Props {
   songs: SongType[]
   pic: string
-  title: string,
-  loading: boolean,
+  title: string
+  loading: boolean
   noResultText?: string
 }
 
@@ -79,13 +84,13 @@ const bgImageStyle = computed(() => {
     paddingTop,
     height,
     backgroundImage: `url(${props.pic})`,
-    transform: `scale(${scale}) translateZ(${translateZ}px)`
+    transform: `scale(${scale}) translateZ(${translateZ}px)`,
   }
 })
 // 滚动的样式
 const scrollStype = computed(() => {
   return {
-    top: `${imageHeight.value}px`
+    top: `${imageHeight.value}px`,
   }
 })
 // 模糊的computed
@@ -93,10 +98,14 @@ const filterStyle = computed(() => {
   let blur = 0
   const imageHeightV = imageHeight.value
   if (scrollY.value >= 0) {
-    blur = Math.min(maxTranslateY.value / imageHeightV, scrollY.value / imageHeightV) * 20
+    blur =
+      Math.min(
+        maxTranslateY.value / imageHeightV,
+        scrollY.value / imageHeightV
+      ) * 20
   }
   return {
-    backdropFilter: `blur(${blur}px)`
+    backdropFilter: `blur(${blur}px)`,
   }
 })
 
@@ -110,7 +119,7 @@ const playBtnStyle = computed(() => {
     display = 'none'
   }
   return {
-    display
+    display,
   }
 })
 
@@ -127,17 +136,16 @@ function onScroll(pos: any) {
   scrollY.value = -pos.y
 }
 
-function selectItem({ index }: { song: SongType, index: number }) {
+function selectItem({ index }: { song: SongType; index: number }) {
   playStore.selectPlay({
     list: props.songs,
-    index
+    index,
   })
 }
 
 function random() {
   playStore.randomPlay(props.songs)
 }
-
 </script>
 
 <style lang="scss" scoped>

@@ -4,7 +4,13 @@ import { getLyric } from '../../service/song'
 import { LyricType, SongType } from '../../types/song'
 import Lyric from 'lyric-parser'
 
-export default function useLyric({ songReady, currentTime }: { songReady: Ref, currentTime: Ref }) {
+export default function useLyric({
+  songReady,
+  currentTime,
+}: {
+  songReady: Ref
+  currentTime: Ref
+}) {
   const currentLyric = ref<LyricType | null>(null)
   const currentLineNum = ref<number>(0)
   const lyricScrollRef = ref<any>(null)
@@ -36,11 +42,14 @@ export default function useLyric({ songReady, currentTime }: { songReady: Ref, c
         playLyric()
       }
     } else {
-      playingLyric.value = pureMusicLyric.value = lyric.replace(/\[(\d{2}):(\d{2}):(\d{2})\]/g, '')
+      playingLyric.value = pureMusicLyric.value = lyric.replace(
+        /\[(\d{2}):(\d{2}):(\d{2})\]/g,
+        ''
+      )
     }
   })
 
-  function handleLyric({ lineNum, txt }: { lineNum: number, txt: string }) {
+  function handleLyric({ lineNum, txt }: { lineNum: number; txt: string }) {
     currentLineNum.value = lineNum
     playingLyric.value = txt
     const scrollComp = lyricScrollRef.value
@@ -76,6 +85,6 @@ export default function useLyric({ songReady, currentTime }: { songReady: Ref, c
     playLyric,
     stopLyric,
     pureMusicLyric,
-    playingLyric
+    playingLyric,
   }
 }

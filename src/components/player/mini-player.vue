@@ -3,7 +3,13 @@
     <div class="mini-player" v-show="!fullScreen" @click="showNormalPlayer">
       <div class="cd-wrapper">
         <div class="cd" ref="cdRef">
-          <img ref="cdImageRef" :src="currentSong.pic" width="40" height="40" :class="cdCls">
+          <img
+            ref="cdImageRef"
+            :src="currentSong.pic"
+            width="40"
+            height="40"
+            :class="cdCls"
+          />
         </div>
       </div>
       <div class="slider-wrapper">
@@ -12,21 +18,25 @@
       </div>
       <div class="control">
         <progressCircle :radius="32" :progress="progress">
-          <i class="icon-mini" :class="miniPlayIcon" @click.stop="togglePlay"></i>
+          <i
+            class="icon-mini"
+            :class="miniPlayIcon"
+            @click.stop="togglePlay"
+          ></i>
         </progressCircle>
       </div>
     </div>
   </transition>
 </template>
 
-<script lang='ts' setup>
+<script lang="ts" setup>
 import { usePlayerStore } from '@/store'
 import { computed, defineProps } from 'vue'
 import useCd from './use-cd'
 import progressCircle from './progress-circle.vue'
 
 interface Props {
-  progress: number,
+  progress: number
   togglePlay: () => void
 }
 
@@ -39,15 +49,16 @@ const fullScreen = computed(() => store.fullScreen)
 const currentSong = computed(() => store.currentSong)
 const playing = computed(() => store.playing)
 
-const miniPlayIcon = computed(() => playing.value ? 'icon-pause-mini' : 'icon-play-mini')
+const miniPlayIcon = computed(() =>
+  playing.value ? 'icon-pause-mini' : 'icon-play-mini'
+)
 
 function showNormalPlayer() {
   store.setFullScreen(true)
 }
-
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .mini-player {
   display: flex;
   align-items: center;
@@ -147,7 +158,7 @@ function showNormalPlayer() {
   &.mini-enter-from,
   &.mini-leave-to {
     opacity: 0;
-    transform: translate3d(0, 100%, 0)
+    transform: translate3d(0, 100%, 0);
   }
 }
 </style>

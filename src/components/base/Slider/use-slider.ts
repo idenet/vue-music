@@ -4,7 +4,7 @@ import { onMounted, onUnmounted, ref } from 'vue'
 
 BScroll.use(Slide)
 
-export default function useSlider (wrapperRef: any) {
+export default function useSlider(wrapperRef: any) {
   const slider = ref<BScroll | null>(null)
   const currentPageIndex = ref<number>(0)
 
@@ -16,7 +16,7 @@ export default function useSlider (wrapperRef: any) {
       momentum: false,
       bounce: false,
       probeType: 2,
-      slide: true
+      slide: true,
     })
 
     slider.value.on('slideWillChange', (page: any) => {
@@ -30,6 +30,6 @@ export default function useSlider (wrapperRef: any) {
 
   return {
     slider,
-    currentPageIndex
+    currentPageIndex,
   }
 }

@@ -1,5 +1,5 @@
 export interface SingerType {
-  id: number,
+  id: number
   mid: string
   name: string
   pic: string

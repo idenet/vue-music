@@ -1,6 +1,11 @@
 <template>
   <ul class="song-list">
-    <li class="item" v-for="(song, index) in props.songs" :key="song.id" @click="selectItem(song, index)">
+    <li
+      class="item"
+      v-for="(song, index) in props.songs"
+      :key="song.id"
+      @click="selectItem(song, index)"
+    >
       <!-- <div class="rank" v-if="rank">
         <span :class="getRankCls(index)">{{ getRankText(index) }}</span>
       </div> -->
@@ -31,7 +36,6 @@ function getDesc(song: SongType) {
 function selectItem(song: SongType, index: number) {
   emit('select', { song, index })
 }
-
 </script>
 
 <style lang="scss" scoped>
@@ -81,7 +85,7 @@ function selectItem(song: SongType, index: number) {
 
       .name {
         @include no-wrap();
-        color: $color-text
+        color: $color-text;
       }
 
       .desc {

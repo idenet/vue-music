@@ -4,8 +4,13 @@
       <li v-for="group in props.singers" :key="group.title" class="group">
         <h2 class="title">{{ group.title }}</h2>
         <ul>
-          <li v-for="item in group.list" :key="item.id" class="item" @click="onItemCLick(item)">
-            <img class="avatar" v-lazy="item.pic">
+          <li
+            v-for="item in group.list"
+            :key="item.id"
+            class="item"
+            @click="onItemCLick(item)"
+          >
+            <img class="avatar" v-lazy="item.pic" />
             <span class="name">{{ item.name }}</span>
           </li>
         </ul>
@@ -14,16 +19,25 @@
     <div class="fixed" v-show="fixedTitle" :style="fixedStyle">
       <div class="fixed-title">{{ fixedTitle }}</div>
     </div>
-    <div class="shortcut" @touchstart.stop.prevent="onShortcutTouchStart" @touchmove.stop.prevent="onShortcutTouchMove"
-      @touchend.stop.prevent>
+    <div
+      class="shortcut"
+      @touchstart.stop.prevent="onShortcutTouchStart"
+      @touchmove.stop.prevent="onShortcutTouchMove"
+      @touchend.stop.prevent
+    >
       <ul>
-        <li v-for="(item, index) in shortcutList" :key="item" :data-index="index" class="item"
-          :class="{ 'current': currentIndex === index }">
+        <li
+          v-for="(item, index) in shortcutList"
+          :key="item"
+          :data-index="index"
+          class="item"
+          :class="{ current: currentIndex === index }"
+        >
           {{ item }}
         </li>
       </ul>
     </div>
-  </scroll>
+  </Scroll>
 </template>
 
 <script lang="ts" setup>
@@ -41,14 +55,15 @@ const props = defineProps<Props>()
 
 const emit = defineEmits(['select'])
 
-const { groupRef, onScroll, fixedTitle, fixedStyle, currentIndex } = useFixed(props)
+const { groupRef, onScroll, fixedTitle, fixedStyle, currentIndex } =
+  useFixed(props)
 
-const { shortcutList, scrollRef, onShortcutTouchStart, onShortcutTouchMove } = useShortcut(props, groupRef)
+const { shortcutList, scrollRef, onShortcutTouchStart, onShortcutTouchMove } =
+  useShortcut(props, groupRef)
 
 function onItemCLick(item: SingerType) {
   emit('select', item)
 }
-
 </script>
 
 <style lang="scss" scoped>
@@ -125,7 +140,7 @@ function onItemCLick(item: SingerType) {
       font-size: $font-size-small;
 
       &.current {
-        color: $color-theme
+        color: $color-theme;
       }
     }
   }

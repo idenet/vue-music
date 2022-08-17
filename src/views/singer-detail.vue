@@ -1,11 +1,15 @@
-
 <template>
   <div class="singer-detail">
-    <MusicList :songs="songs" :pic="pic" :title="title" :loading="loading"></MusicList>
+    <MusicList
+      :songs="songs"
+      :pic="pic"
+      :title="title"
+      :loading="loading"
+    ></MusicList>
   </div>
 </template>
 
-<script lang='ts' setup>
+<script lang="ts" setup>
 import { defineProps, onMounted, ref, computed } from 'vue'
 import { SingerType } from '../types/singers'
 import { getSingerDetail } from '../service/singer'
@@ -67,7 +71,7 @@ async function _getSingerDetail() {
 }
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .singer-detail {
   position: fixed;
   z-index: 10;

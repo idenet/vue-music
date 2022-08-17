@@ -1,9 +1,9 @@
 import { ref } from 'vue'
 
 interface TouchType {
-  startX: number,
-  startY: number,
-  percent: number,
+  startX: number
+  startY: number
+  percent: number
   directionLock: string
 }
 
@@ -16,7 +16,7 @@ export default function useMiddleInteractive() {
     startX: 0,
     startY: 0,
     percent: 0,
-    directionLock: ''
+    directionLock: '',
   }
   let currentView = 'cd'
 
@@ -60,11 +60,11 @@ export default function useMiddleInteractive() {
 
     middleLStyle.value = {
       opacity: 1 - touch.percent,
-      transitionDuration: '0ms'
+      transitionDuration: '0ms',
     }
     middleRStyle.value = {
       transform: `translate3d(${offsetWidth}px, 0, 0)`,
-      transitionDuration: '0ms'
+      transitionDuration: '0ms',
     }
   }
 
@@ -84,11 +84,11 @@ export default function useMiddleInteractive() {
     const duration = 300
     middleLStyle.value = {
       opacity,
-      transitionDuration: `${duration}ms`
+      transitionDuration: `${duration}ms`,
     }
     middleRStyle.value = {
       transform: `translate3d(${offsetWidth}px, 0, 0)`,
-      transitionDuration: `${duration}ms`
+      transitionDuration: `${duration}ms`,
     }
   }
 
@@ -98,6 +98,6 @@ export default function useMiddleInteractive() {
     middleRStyle,
     onMiddleTouchStart,
     onMiddleTouchMove,
-    onMiddleTouchEnd
+    onMiddleTouchEnd,
   }
 }

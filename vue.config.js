@@ -10,9 +10,9 @@ module.exports = defineConfig({
         additionalData: `
           @import "@/assets/scss/variable.scss";
           @import "@/assets/scss/mixin.scss";
-        `
-      }
-    }
+        `,
+      },
+    },
   },
   chainWebpack: (config) => {
     config.module
@@ -21,13 +21,13 @@ module.exports = defineConfig({
       .tap((options) => {
         return {
           ...options,
-          reactivityTransform: true
+          reactivityTransform: true,
         }
       })
   },
   devServer: {
-    onBeforeSetupMiddleware (devServer) {
+    onBeforeSetupMiddleware(devServer) {
       registerRouter(devServer.app)
-    }
-  }
+    },
+  },
 })
