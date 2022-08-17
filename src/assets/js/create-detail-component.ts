@@ -3,9 +3,10 @@ import { useRoute, useRouter } from 'vue-router'
 import storage from 'good-storage'
 import { processSongs } from '@/service/song'
 import { SingerType } from '@/types/singers'
+import { topListType } from '../../types/topList'
 
 interface singerT {
-  data: SingerType
+  data: SingerType | topListType
 }
 
 export default function useCreateDetailComponent(

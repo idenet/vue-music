@@ -3,7 +3,7 @@
     <div class="back" @click="goBack">
       <i class="icon-back"></i>
     </div>
-    <h1 class="title">{{ props.title }}</h1>
+    <h1 class="title">{{ title }}</h1>
     <div class="bg-image" :style="bgImageStyle" ref="bgImage">
       <div class="play-btn-wrapper" :style="playBtnStyle">
         <div v-show="songs.length > 0" class="play-btn" @click="random">
@@ -22,7 +22,7 @@
       @scroll="onScroll"
     >
       <div class="song-list-wrapper">
-        <song-list :songs="props.songs" @select="selectItem"></song-list>
+        <song-list :rank="rank" :songs="songs" @select="selectItem"></song-list>
       </div>
     </scroll>
   </div>
@@ -44,9 +44,17 @@ interface Props {
   title: string
   loading: boolean
   noResultText?: string
+  rank?: boolean
 }
 
-const props = defineProps<Props>()
+const {
+  songs,
+  pic,
+  title,
+  loading,
+  noResultText,
+  rank = false,
+} = defineProps<Props>()
 const imageHeight = ref<number>(0)
 const bgImage = ref<HTMLDivElement | null>(null)
 const scrollY = ref<number>(0)
@@ -56,7 +64,7 @@ const router = useRouter()
 const playStore = usePlayerStore()
 
 const noResultTextn = computed(() => {
-  return props.noResultText ? props.noResultText : '抱歉，没有找到可播放的歌曲'
+  return noResultText || '抱歉，没有找到可播放的歌曲'
 })
 
 // 背景图片
@@ -83,7 +91,7 @@ const bgImageStyle = computed(() => {
     zIndex,
     paddingTop,
     height,
-    backgroundImage: `url(${props.pic})`,
+    backgroundImage: `url(${pic})`,
     transform: `scale(${scale}) translateZ(${translateZ}px)`,
   }
 })
@@ -112,7 +120,7 @@ const filterStyle = computed(() => {
 })
 
 const noResult = computed(() => {
-  return !props.loading && !props.songs.length
+  return !loading && !songs.length
 })
 
 const playBtnStyle = computed(() => {
@@ -140,13 +148,13 @@ function onScroll(pos: any) {
 
 function selectItem({ index }: { song: SongType; index: number }) {
   playStore.selectPlay({
-    list: props.songs,
+    list: songs,
     index,
   })
 }
 
 function random() {
-  playStore.randomPlay(props.songs)
+  playStore.randomPlay(songs)
 }
 </script>
 

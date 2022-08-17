@@ -28,6 +28,12 @@ const routes = [
   {
     path: '/top-list',
     component: () => import('@/views/TopList.vue'),
+    children: [
+      {
+        path: ':id',
+        component: () => import('@/views/top-detail.vue'),
+      },
+    ],
   },
   {
     path: '/search',
