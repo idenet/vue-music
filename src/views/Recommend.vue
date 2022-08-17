@@ -10,7 +10,12 @@
         <div class="recommend-list">
           <h1 class="list-title" v-show="!loading">热门歌单推荐</h1>
           <ul>
-            <li v-for="item in albums" class="item" :key="item.id">
+            <li
+              v-for="item in albums"
+              class="item"
+              :key="item.id"
+              @click="selectItem(item)"
+            >
               <div class="icon">
                 <img width="60" height="60" v-lazy="item.pic" />
               </div>
@@ -27,6 +32,11 @@
         </div>
       </div>
     </Scroll>
+    <router-view v-slot="{ Component }">
+      <transition appear name="slide">
+        <component :is="Component" :data="selectAlbum" />
+      </transition>
+    </router-view>
   </div>
 </template>
 
@@ -35,6 +45,12 @@ import { computed, onMounted, ref } from 'vue'
 import { getRecommend } from '../service/recommend'
 import Slider from '@/components/base/Slider/Slider.vue'
 import Scroll from '@/components/wrap-scroll'
+import { albumType } from '@/types/album'
+import { useRouter } from 'vue-router'
+import storage from 'good-storage'
+import { ALBUM_KEY } from '../assets/js/constant'
+
+const router = useRouter()
 
 interface SliderType {
   id: string
@@ -42,16 +58,10 @@ interface SliderType {
   pic: string
 }
 
-interface albumType {
-  id: string
-  title: string
-  pic: string
-  username: string
-}
-
 const sliders = ref<SliderType[]>([])
 const albums = ref<albumType[]>([])
 const loadingText = ref<string>('正在载入中...')
+const selectAlbum = ref<albumType | null>(null)
 
 const loading = computed(() => !sliders.value.length && !albums.value.length)
 
@@ -63,6 +73,18 @@ async function _getRecommend() {
   const result = await getRecommend()
   sliders.value = result.sliders
   albums.value = result.albums
+}
+
+function selectItem(album: albumType) {
+  selectAlbum.value = album
+  cacheAlbum(album)
+  router.push({
+    path: `/recommend/${album.id}`,
+  })
+}
+
+function cacheAlbum(album: albumType) {
+  storage.session.set(ALBUM_KEY, album)
 }
 </script>
 
