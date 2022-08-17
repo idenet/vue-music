@@ -17,10 +17,22 @@
 
 ```json
 "lint-staged": {
- "src/**/*.{vue,ts}": [
-   "eslint --fix"
+  "src/**/*.{vue,ts}": [
+   "prettier --write .",
+   "eslint  --fix --cache"
+ ],
+ "*.md": [
+   "prettier --write"
  ]
 },
+```
+
+配置`prettier`，安装`eslint-plugin-prettier 和 eslint-config-prettier`，然后在`eslintrc`中配置
+
+```js
+extends: [
+ 'prettier',
+],
 ```
 
 3. 配置`commitlint`

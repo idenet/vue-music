@@ -12,9 +12,13 @@
           />
         </div>
       </div>
-      <div class="slider-wrapper">
-        <h2 class="name">{{ currentSong.name }}</h2>
-        <p class="desc">{{ currentSong.singer }}</p>
+      <div ref="sliderWrapperRef" class="slider-wrapper">
+        <div class="slider-group">
+          <div class="slider-page" v-for="song in playlist" :key="song.id">
+            <h2 class="name">{{ song.name }}</h2>
+            <p class="desc">{{ song.singer }}</p>
+          </div>
+        </div>
       </div>
       <div class="control">
         <progressCircle :radius="32" :progress="progress">
@@ -34,6 +38,7 @@ import { usePlayerStore } from '@/store'
 import { computed, defineProps } from 'vue'
 import useCd from './use-cd'
 import progressCircle from './progress-circle.vue'
+import { useMiniSlider } from './use-mini-slider'
 
 interface Props {
   progress: number
@@ -44,10 +49,12 @@ const { progress, togglePlay } = defineProps<Props>()
 
 const store = usePlayerStore()
 const { cdCls, cdRef, cdImageRef } = useCd()
+const { sliderWrapperRef } = useMiniSlider()
 
 const fullScreen = computed(() => store.fullScreen)
 const currentSong = computed(() => store.currentSong)
 const playing = computed(() => store.playing)
+const playlist = computed(() => store.playList)
 
 const miniPlayIcon = computed(() =>
   playing.value ? 'icon-pause-mini' : 'icon-play-mini'
