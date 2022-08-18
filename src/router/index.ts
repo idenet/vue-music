@@ -45,6 +45,12 @@ const routes = [
       },
     ],
   },
+  {
+    path: '/user',
+    components: {
+      user: () => import('@/views/user-center.vue'),
+    },
+  },
 ]
 
 const router = createRouter({

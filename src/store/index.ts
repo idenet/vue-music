@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { SongType } from '../types/song'
 import { shuffle } from '../assets/js/util'
 import { load } from '../assets/js/array-store'
-import { FAVORATE_KEY, SEARCH_KEY, PLAY_KEY } from '../assets/js/constant'
+import { SEARCH_KEY } from '../assets/js/constant'
 
 export enum PLAYMODE {
   sequence = 0,
@@ -31,9 +31,9 @@ export const usePlayerStore = defineStore('player', {
     playMode: PLAYMODE.sequence, // 播放模式
     currentIndex: 0, // 当前播放
     fullScreen: false, // 是否全屏
-    favoriteList: load(FAVORATE_KEY),
+    favoriteList: [],
     searchHistory: load(SEARCH_KEY),
-    playHistory: load(PLAY_KEY),
+    playHistory: [],
   }),
   getters: {
     currentSong: (state) => state.playList[state.currentIndex] || {},

@@ -57,3 +57,7 @@ export function clear<T>(key: string): T[] {
   storage.remove(key)
   return []
 }
+
+export function saveAll<T>(items: T[], key: string) {
+  storage.set(key, items)
+}
