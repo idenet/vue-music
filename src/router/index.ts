@@ -38,6 +38,12 @@ const routes = [
   {
     path: '/search',
     component: () => import('@/views/Search.vue'),
+    children: [
+      {
+        path: ':id',
+        component: () => import('@/views/singer-detail.vue'),
+      },
+    ],
   },
 ]
 

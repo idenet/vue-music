@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { SongType } from '../types/song'
 import { shuffle } from '../assets/js/util'
 import { load } from '../assets/js/array-store'
-import { FAVORATE_KEY } from '../assets/js/constant'
+import { FAVORATE_KEY, SEARCH_KEY } from '../assets/js/constant'
 
 export enum PLAYMODE {
   sequence = 0,
@@ -18,6 +18,7 @@ interface PlayerType {
   currentIndex: number // 当前播放
   fullScreen: boolean // 是否全屏
   favoriteList: SongType[]
+  searchHistory: string[]
 }
 
 // 播放的store
@@ -30,6 +31,7 @@ export const usePlayerStore = defineStore('player', {
     currentIndex: 0, // 当前播放
     fullScreen: false, // 是否全屏
     favoriteList: load(FAVORATE_KEY),
+    searchHistory: load(SEARCH_KEY),
   }),
   getters: {
     currentSong: (state) => state.playList[state.currentIndex] || {},
@@ -56,6 +58,9 @@ export const usePlayerStore = defineStore('player', {
     },
     setFavoriteList(list: SongType[]) {
       this.favoriteList = list
+    },
+    setSearchHistory(history: string[]) {
+      this.searchHistory = history
     },
     // 选择播放
     selectPlay({ list, index }: { list: SongType[]; index: number }) {
@@ -123,6 +128,30 @@ export const usePlayerStore = defineStore('player', {
       this.setPlayList([])
       this.setCurrentIndex(0)
       this.setPlayState(false)
+    },
+    addSong(song: SongType) {
+      const playlist = this.playList.slice()
+      const sequencelist = this.sequeceList.slice()
+      let currentIndex = this.currentIndex
+
+      const playIndex = findIndex(playlist, song)
+
+      if (playIndex > -1) {
+        currentIndex = playIndex
+      } else {
+        playlist.push(song)
+        currentIndex = playlist.length - 1
+      }
+      const sequenceIndex = findIndex(sequencelist, song)
+      if (sequenceIndex === -1) {
+        sequencelist.push(song)
+      }
+
+      this.setSequenceList(sequencelist)
+      this.setPlayList(playlist)
+      this.setCurrentIndex(currentIndex)
+      this.setPlayState(true)
+      this.setFullScreen(true)
     },
   },
 })

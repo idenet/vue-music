@@ -15,7 +15,7 @@ export function processSongs(songs: any) {
         return song
       })
       .filter((song: { url: string | string[] }) => {
-        return song.url.indexOf('vkey') > -1
+        return song.url && song.url.indexOf('vkey') > -1
       })
   })
 }

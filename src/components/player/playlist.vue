@@ -68,7 +68,7 @@ import confirm from '../base/comfirm/confirm.vue'
 
 const visible = ref<boolean>(false)
 const scrollRef = ref<any>(null)
-const listRef = ref<HTMLUListElement | null>(null)
+const listRef = ref<any>(null)
 const removing = ref<boolean>(false)
 const confirmRef = ref<any>(null)
 
@@ -119,7 +119,7 @@ function scrollToCurrent() {
     (song) => currentSong.value.id === song.id
   )
   if (index === -1) return
-  const target = listRef.value?.children[index]
+  const target = listRef.value.$el.children[index]
   scrollRef.value.scroll.scrollToElement(target, 300)
 }
 
