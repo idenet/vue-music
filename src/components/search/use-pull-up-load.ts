@@ -10,7 +10,7 @@ export default function usePullUpLoad(
   requestData: any,
   preventPullUpLoad: any
 ) {
-  const scroll = ref<any>(null)
+  const scroll = ref<BScroll | null>(null)
   const rootRef = ref<HTMLDivElement | null>(null)
   const isPullUpLoad = ref(false)
 
@@ -39,7 +39,7 @@ export default function usePullUpLoad(
   })
 
   onUnmounted(() => {
-    scroll.value.destory()
+    scroll.value?.destroy()
   })
 
   return {

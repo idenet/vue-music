@@ -35,12 +35,12 @@
               </li>
             </transition-group>
           </scroll>
-          <!-- <div class="list-add">
+          <div class="list-add">
             <div class="add" @click="showAddSong">
               <i class="icon-add"></i>
               <span class="text">添加歌曲到队列</span>
             </div>
-          </div> -->
+          </div>
           <div class="list-footer" @click="hide">
             <span>关闭</span>
           </div>
@@ -51,7 +51,7 @@
           text="是否清空播放列表？"
           confirm-btn-text="清空"
         ></confirm>
-        <!-- <add-song ref="addSongRef"></add-song> -->
+        <add-song ref="addSongRef"></add-song>
       </div>
     </transition>
   </teleport>
@@ -59,6 +59,7 @@
 
 <script lang="ts" setup>
 import scroll from '../base/scroll/scroll.vue'
+import addSong from '../add-song/add-song.vue'
 import { computed, ref, defineExpose, nextTick, watch } from 'vue'
 import { usePlayerStore } from '../../store/index'
 import useMode from './useMode'
@@ -71,6 +72,7 @@ const scrollRef = ref<any>(null)
 const listRef = ref<any>(null)
 const removing = ref<boolean>(false)
 const confirmRef = ref<any>(null)
+const addSongRef = ref<any>(null)
 
 const store = usePlayerStore()
 
@@ -86,6 +88,10 @@ watch(currentSong, async (newSong) => {
   await nextTick()
   scrollToCurrent()
 })
+
+function showAddSong() {
+  addSongRef.value.show()
+}
 
 function showConfirm() {
   confirmRef.value.show()

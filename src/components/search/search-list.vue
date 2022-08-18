@@ -8,7 +8,11 @@
         @click="$emit('select', item)"
       >
         <span class="text">{{ item }}</span>
-        <span class="icon" @click.stop="$emit('delete', item)">
+        <span
+          v-if="showDelete"
+          class="icon"
+          @click.stop="$emit('delete', item)"
+        >
           <i class="icon-delete"></i>
         </span>
       </li>
@@ -21,8 +25,9 @@ import { defineProps, defineEmits } from 'vue'
 
 interface Props {
   searches: string[]
+  showDelete?: boolean
 }
-const { searches } = defineProps<Props>()
+const { searches, showDelete = true } = defineProps<Props>()
 
 defineEmits(['select', 'delete'])
 </script>

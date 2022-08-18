@@ -23,7 +23,7 @@ import { SongType } from '../../../types/song'
 
 interface Props {
   songs: SongType[]
-  rank: boolean
+  rank?: boolean
 }
 
 const { songs, rank = false } = defineProps<Props>()

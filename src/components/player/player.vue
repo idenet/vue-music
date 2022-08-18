@@ -127,6 +127,7 @@ import useLyric from './use-lyric'
 import useMiddleInteractive from './use-middle-interactive'
 import miniPlayer from './mini-player.vue'
 import useAnimation from './use-animation'
+import usePlayHistory from './use-play-history'
 
 const audioRef = ref<HTMLAudioElement | null>(null)
 const songReady = ref<boolean>(false)
@@ -159,6 +160,7 @@ const {
 } = useMiddleInteractive()
 
 const { cdWrapperRef, enter, afterEnter, leave, afterLeave } = useAnimation()
+const { savePlay } = usePlayHistory()
 
 // pinia getter
 const currentSong = computed(() => playerStore.currentSong)
@@ -256,6 +258,7 @@ function ready() {
   if (songReady.value) return
   songReady.value = true
   playLyric()
+  savePlay(currentSong.value)
 }
 
 function error() {
