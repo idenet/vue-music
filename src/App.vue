@@ -20,10 +20,17 @@ const viewStyle = computed(() => {
 <template>
   <MHeader></MHeader>
   <MTab></MTab>
-  <router-view :style="viewStyle"></router-view>
+  <router-view :style="viewStyle" v-slot="{ Component }">
+    <keep-alive>
+      <component :is="Component" />
+    </keep-alive>
+  </router-view>
+  <!-- 命名视图 -->
   <router-view :style="viewStyle" name="user" v-slot="{ Component }">
     <transition appear name="slide">
-      <component :is="Component" />
+      <keep-alive>
+        <component :is="Component" />
+      </keep-alive>
     </transition>
   </router-view>
   <player></player>
